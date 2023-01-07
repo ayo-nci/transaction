@@ -16,11 +16,10 @@ export class TransactionService {
     return await transactionHistory;
   }
   //Fetch single transaction
-  async getExchangeTransaction(
-    transactionID: string,
-  ): Promise<TransactionDocument> {
+  async getExchangeTransaction(id): Promise<TransactionDocument> {
+    // console.log('service id is ' + id);
     const singleExchangeTransaction = await this.transactionModel
-      .findById(transactionID)
+      .findById(id)
       .exec();
     return await singleExchangeTransaction;
   }

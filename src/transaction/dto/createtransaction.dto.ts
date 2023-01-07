@@ -1,8 +1,8 @@
 export class CreateTransactionDTO {
-  from_currency: string;
-  from_amount: number;
-  to_currency: string;
-  to_amount: number;
-  date: Date;
-  price_type: string;
+  readonly from_currency: string;
+  readonly from_amount: number;
+  readonly to_currency: string;
+  readonly to_amount: number;
+  readonly date: Date;
+  readonly price_type: string;
 }

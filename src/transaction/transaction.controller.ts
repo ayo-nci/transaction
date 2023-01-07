@@ -6,7 +6,7 @@ import {
   HttpStatus,
   Post,
   // Put,
-  // Query,
+  Query,
   NotFoundException,
   // Delete,
   Param,
@@ -20,7 +20,7 @@ export class TransactionController {
   constructor(private transactionService: TransactionService) {}
 
   //add an exchange rate transaction
-  @Post('/create')
+  @Post('create')
   async addTransaction(
     @Res() res,
     @Body() createtransactionDTO: CreateTransactionDTO,
@@ -43,12 +43,12 @@ export class TransactionController {
     return res.status(HttpStatus.OK).json(allTransactions);
   }
   //Retrieve single exchange rate transaction by ID
-  @Get('/:id')
-  async getTransaction(@Res() res, @Param('_id') id: string) {
+  @Get()
+  async getTransaction(@Res() res, @Query('id') id?: string) {
     const transaction = await this.transactionService.getExchangeTransaction(
       id,
     );
-    console.log(id + ':' + transaction);
+    //console.log(id + ':' + transaction);
     if (!transaction)
       throw new NotFoundException('Transaction does not exist!');
     return res.status(HttpStatus.OK).json(transaction);
