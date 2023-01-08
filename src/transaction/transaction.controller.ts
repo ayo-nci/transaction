@@ -10,6 +10,7 @@ import {
   NotFoundException,
   // Delete,
   Param,
+  // ValidationPipe,
 } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
 
@@ -17,19 +18,25 @@ import { CreateTransactionDTO } from './dto/createtransaction.dto';
 
 @Controller('transaction')
 export class TransactionController {
-  constructor(private transactionService: TransactionService) {}
+  constructor(private readonly transactionService: TransactionService) {}
 
   //add an exchange rate transaction
-  @Post('create')
+  @Post('/create')
   async addTransaction(
     @Res() res,
-    @Body() createtransactionDTO: CreateTransactionDTO,
+    //  @Body(new ValidationPipe({ transform: true }))
+    // createtransactionDTO: CreateTransactionDTO,
+    @Body() createTransactionDTO: CreateTransactionDTO,
   ) {
     /*  const Transaction = await this.transactionService.addExchangeTransaction(
       createtransactionDTO,
     );*/
+    //const TransactionClient = CreateTransactionDTO.from(createtransactionDTO);
+    console.log(
+      'createtransactionDTO is ' + JSON.stringify(createTransactionDTO),
+    );
     const Transaction = await this.transactionService.addExchangeTransaction(
-      createtransactionDTO,
+      createTransactionDTO,
     );
     return res.status(HttpStatus.OK).json({
       message: 'Transaction has been created successfully',

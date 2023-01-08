@@ -40,6 +40,10 @@ export class TransactionService {
   async addExchangeTransaction(
     createTransactionDTO: CreateTransactionDTO,
   ): Promise<TransactionDocument> {
+    console.log(
+      'createtransactionDTO in services is ' +
+        JSON.stringify(createTransactionDTO),
+    );
     const newExchangeTransaction = new this.transactionModel(
       createTransactionDTO,
     );
