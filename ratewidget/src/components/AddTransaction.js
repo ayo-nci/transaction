@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
+
 const AddTransaction = () => {
     const from_currency = useRef("");
     const from_amount = useRef("");
@@ -29,10 +30,8 @@ const AddTransaction = () => {
     };
 
 
-
-
-
     return <>
+
     <Container className="mt-2">
         <Row>
             <Col className="col-md-8 offset-md-2">
@@ -77,7 +76,7 @@ const AddTransaction = () => {
 
             </Col>
         </Row>
-    </Container>
+    </Container> 
     </>
 };
 

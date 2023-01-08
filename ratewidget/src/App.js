@@ -1,15 +1,17 @@
 
 import './App.css';
 import { Route, Routes } from "react-router-dom";
-import AllTransactions from './pages/AllTransactions';
-import AddTransaction from './pages/AddTransaction';
+import Transactiontable from './components/Transactiontable';
+import AllTransactions from './components/AllTransactions';
+import AddTransaction from './components/AddTransaction';
+
 
 
 function App() {
   return (
     <div className="App">
      <Routes>
-        <Route path="/" element={<AllTransactions/>}></Route>
+        <Route path="/" element={<Transactiontable/>}></Route>
         <Route path="/transaction/create" element={<AddTransaction/>}></Route>
      </Routes>
     </div>
