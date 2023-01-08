@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
+import DateTimePicker from 'react-datetime-picker';
 
 const Transactiontable = () => {
     const [transactions, setTransactions] = useState([]);
@@ -16,6 +17,7 @@ const Transactiontable = () => {
         { label: "Price Type", accessor: "price_type"},  
     ];
     const navigate = useNavigate();
+    const [datetimeValue, setDatetimevalue] = useState(new Date());
 
     useEffect(() => {
         axios.get("http://localhost:5000/transaction/transactions").then((response)=>{
@@ -50,6 +52,13 @@ const Transactiontable = () => {
                     <Button variant="primary" type="button" onClick={() => navigate('/transaction/create')}>
                         Make transaction
                     </Button>
+                </Col>
+            </Row>
+            <br>
+            </br>
+            <Row>
+                <Col className="col-md-4 offset-md-4">
+                    <DateTimePicker onChange={setDatetimevalue} value={datetimeValue}/>
                 </Col>
             </Row>
 

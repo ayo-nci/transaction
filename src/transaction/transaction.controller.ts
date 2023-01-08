@@ -60,14 +60,16 @@ export class TransactionController {
       throw new NotFoundException('Transaction does not exist!');
     return res.status(HttpStatus.OK).json(transaction);
   }
-  //Filter transaction history by property
-  @Get('/transactions/:transactionProperty')
-  async filterTransactions(
-    @Res() res,
-    @Param('the_transactionProperty') transactionProperty,
-  ) {
-    const filteredTransactions =
-      await this.transactionService.getFilteredHistory(transactionProperty);
-    return res.status(HttpStatus.OK).json(filteredTransactions);
+  //Filter transaction history by date
+  @Get('/date')
+  async filterByDate(@Res() res, @Body() date_: any) {
+    // console.log('Received date is ' + new Date(date_.date));
+    const filteredDateHistory = await this.transactionService.getFilteredDate(
+      new Date(date_.date).getTime(),
+    );
+    //console.log(id + ':' + transaction);
+    if (!filteredDateHistory)
+      throw new NotFoundException('Date does not exist!');
+    return res.status(HttpStatus.OK).json(filteredDateHistory);
   }
 }

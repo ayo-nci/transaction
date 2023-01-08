@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { TransactionDocument } from './interfaces/transaction.interface';
 import { Model } from 'mongoose';
 import { CreateTransactionDTO } from './dto/createtransaction.dto';
+import { endOfDay, startOfDay, parseISO, format } from 'date-fns';
 
 @Injectable()
 export class TransactionService {
@@ -33,6 +34,17 @@ export class TransactionService {
       .exec();
     return filteredTransactionHistory;
   }
+  //Filter history with date or from_currency or price type
+  async getFilteredDate(datevalue: number): Promise<TransactionDocument[]> {
+    // console.log('Received date in service is ' + datevalue);
+    const startOfDay_ = startOfDay(datevalue);
+    const endOfDay_ = endOfDay(datevalue);
+    const dateFilteredTransactionHistory = await this.transactionModel
+      .find({ date: { $gte: startOfDay_, $lt: endOfDay_ } })
+      //.find({ date:{$gte:ISODate(somedatevalue 2022-03-01),$lt:isModuleNamespaceObject(uptoanother)} })
+      .exec();
+    return dateFilteredTransactionHistory;
+  }
   //Post an exchange transaction
   /*async addExchangeTransaction(
     createTransactionDTO: CreateTransactionDTO,
@@ -48,11 +60,5 @@ export class TransactionService {
       createTransactionDTO,
     );
     return await newExchangeTransaction.save();
-  }
-  //Delete an exchange transaction
-  async deleteExchangeTransaction(transactionID): Promise<TransactionDocument> {
-    const delExchangeTransaction =
-      await this.transactionModel.findByIdAndRemove(transactionID);
-    return delExchangeTransaction;
   }
 }
