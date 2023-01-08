@@ -44,7 +44,7 @@ export class TransactionController {
     });
   }
   //Retrive exchange rate transaction list
-  @Get('/transactions')
+  @Get('/')
   async getAllTransactions(@Res() res) {
     const allTransactions = await this.transactionService.getAllHistory();
     return res.status(HttpStatus.OK).json(allTransactions);
@@ -61,12 +61,14 @@ export class TransactionController {
     return res.status(HttpStatus.OK).json(transaction);
   }
   //Filter transaction history by date
-  @Get('/date')
+  @Post('/date')
   async filterByDate(@Res() res, @Body() date_: any) {
-    // console.log('Received date is ' + new Date(date_.date));
+    console.log('Received object is ' + JSON.stringify(date_));
+    console.log('Received date is ' + date_.date);
     const filteredDateHistory = await this.transactionService.getFilteredDate(
       new Date(date_.date).getTime(),
     );
+    console.log('FDH is ' + filteredDateHistory);
     //console.log(id + ':' + transaction);
     if (!filteredDateHistory)
       throw new NotFoundException('Date does not exist!');

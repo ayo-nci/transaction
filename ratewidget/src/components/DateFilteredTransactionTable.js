@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import DateTimePicker from 'react-datetime-picker';
-import { setDate } from "date-fns";
 
-const Transactiontable = () => {
+const DateFilteredTransactiontable = () => {
     const [transactions, setTransactions] = useState([]);
+    const [datetimeValue, setDatetimevalue] = useState(new Date());
+    
     const columns = [
         { label: "Date", accessor: "date"},
         { label: "From Currency", accessor: "from_currency"},
@@ -18,32 +19,13 @@ const Transactiontable = () => {
         { label: "Price Type", accessor: "price_type"},  
     ];
     const navigate = useNavigate();
-    const [datetimeValue, setDatetimevalue] = useState(new Date());
-    
-    const getAllTransactions = () => {
-        axios.get(`http://localhost:5000/transaction/`).then((response)=>{
-            setTransactions(response.data);
-        });
-    }
-    
-    
+  
 
     useEffect(() => {
-        getAllTransactions();
-    },[]); 
-
-
-
-    const handleDatePicker = (date) => {
-        setDatetimevalue(date);
-        if (!date) {getAllTransactions(); return }
-        var payload = {"date": date};
-        axios.post(`http://localhost:5000/transaction/date`, payload).then((response)=>{
+        axios.get("localhost:5000/transaction/date").then((response)=>{
             setTransactions(response.data);
         });
-        console.log("datetimevalue is " + new Date(datetimeValue));
-      }
-
+    },[]); 
 
     const handleSorting = (sortField, sortOrder) =>{
         console.log(sortField + ':' + sortOrder);
@@ -64,7 +46,6 @@ const Transactiontable = () => {
     
     };
 
-
    // console.log("some transactions are " + transactions);
     return (<>
         <Container className="mt-2">
@@ -75,14 +56,17 @@ const Transactiontable = () => {
                     </Button>
                 </Col>
             </Row>
-            <br></br>
+            <br>
+            </br>
             <Row>
-                <DateTimePicker
-                    value={datetimeValue}
-                    onChange={date=>handleDatePicker(date)}
-                    />
+                <Col className="col-md-4 offset-md-4">
+                    <DateTimePicker onChange={() =>  navigate('/transaction/date')} value={datetimeValue}/>
+                </Col>
             </Row>
-    
+
+            <br>
+            </br>
+
         <table className="table">
             <caption>
                 Some caption
@@ -96,5 +80,4 @@ const Transactiontable = () => {
     
     </>);
 };
-
-export default Transactiontable;
+export default DateFilteredTransactiontable;

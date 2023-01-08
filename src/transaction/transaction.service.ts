@@ -39,6 +39,7 @@ export class TransactionService {
     // console.log('Received date in service is ' + datevalue);
     const startOfDay_ = startOfDay(datevalue);
     const endOfDay_ = endOfDay(datevalue);
+    console.log('' + startOfDay_ + ':' + endOfDay_);
     const dateFilteredTransactionHistory = await this.transactionModel
       .find({ date: { $gte: startOfDay_, $lt: endOfDay_ } })
       //.find({ date:{$gte:ISODate(somedatevalue 2022-03-01),$lt:isModuleNamespaceObject(uptoanother)} })
