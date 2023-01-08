@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Container, Table, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AllTransactions = () => {
     const [transactions, setTransactions] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get("http://localhost:5000/transaction/transactions").then((response)=>{
@@ -13,6 +15,17 @@ const AllTransactions = () => {
 
     return (<>
         <Container className="mt-2">
+            <Row>
+                <Col className="col-md-4 offset-md-4">
+                    <Button variant="primary" type="button" onClick={() => navigate('/transaction/create')}>
+                        Make transaction
+                    </Button>
+                </Col>
+            </Row>
+
+            <br>
+            </br>
+
             <Table striped bordered hover>
                 <thead>
                     <tr>
