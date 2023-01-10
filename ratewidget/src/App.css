@@ -36,3 +36,44 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* Toolbar CSS */
+/* Responsive horizontal toolbar */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: space-evenly;
+}
+
+/* Light green button */
+button {
+  background-color: #8BC34A;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Align elements on the toolbar */
+.toolbar > * {
+  margin: 0;
+  flex: 1;
+}
+
+
+
+/* Responsive layout */
+@media (max-width: 600px) {
+  .toolbar {
+    flex-direction: column;
+  }
+  .toolbar > * {
+    margin: 8px 0;
+  }
+}
+
+

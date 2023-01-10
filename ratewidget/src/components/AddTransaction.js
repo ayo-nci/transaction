@@ -11,7 +11,7 @@ const AddTransaction = () => {
     const from_amount = useRef("");
     const to_currency = useRef("");
     const to_amount = useRef("");
-    const price_type = useRef("");
+   // const price_type = useRef("");
     const navigate = useNavigate();
 
     const addTransactionHandler = () => {
@@ -21,7 +21,7 @@ const AddTransaction = () => {
             from_amount: from_amount.current.value,
             to_currency: to_currency.current.value,
             to_amount: to_amount.current.value,
-            price_type: price_type.current.value,
+            price_type: "Exchanged",
         };
         //console.log("some payload is " + payload)
         axios.post("http://localhost:5000/transaction/create", payload).then(() => {
@@ -33,16 +33,17 @@ const AddTransaction = () => {
     return <>
 
     <Container className="mt-2">
-        <Row>
+        <Row className="">
             <Col className="col-md-8 offset-md-2">
+            <form className="form-inline">
                 <legend> Add New Transaction</legend>
                 <Form.Group className="mb-3" controlId="formFromCurrency">
                     <Form.Label>From Currency</Form.Label>
                     <Form.Select ref={from_currency}>
-                    <option value="usd">USD-US Dollars</option>
-                    <option value="eur">EUR-Euro</option>
-                    <option value="ngn">NGN-Naira</option>
-                    <option value="gbp">GBP-Pounds</option>
+                    <option value="btc">BTC-Bitcoin</option>
+                    <option value="eth">ETH-Ethereum</option>
+                    <option value="xrp">XRP-Ripple</option>
+                    <option value="ltc">LTC-Litecoin</option>
                 </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formFromAmount">
@@ -52,29 +53,26 @@ const AddTransaction = () => {
                 <Form.Group className="mb-3" controlId="formToCurrency">
                     <Form.Label>To Currency</Form.Label>
                     <Form.Select ref={to_currency}>
-                    <option value="bitcoin">BTC-Bitcoin</option>
-                    <option value="ethereum">ETH-Ethereum</option>
-                    <option value="ripple">XRP-Ripple</option>
-                    <option value="litecoin">LTC-Litecoin</option>
+                    <option value="usd">USD-US Dollars</option>
+                    <option value="eur">EUR-Euro</option>
+                    <option value="ngn">NGN-Naira</option>
+                    <option value="gbp">GBP-Pounds</option>
                 </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formToAmount">
                     <Form.Label>To Amount</Form.Label>
                     <Form.Control type="number" ref={to_amount} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="formPriceType">
-                    <Form.Label>Price Type</Form.Label>
-                    <Form.Control type="text" ref={price_type} />
-                </Form.Group>
+                </form>
                 <Button
                     type="button"
                     variant="primary"
                     onClick={addTransactionHandler}
                 >
-                    Add/perform transaction
+                    Save
                 </Button>
-
             </Col>
+            
         </Row>
     </Container> 
     </>

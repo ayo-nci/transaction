@@ -16,6 +16,8 @@ import { TransactionService } from './transaction.service';
 
 import { CreateTransactionDTO } from './dto/createtransaction.dto';
 
+import { ExchangeRateService } from './ExchangeRateService.service';
+
 @Controller('transaction')
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
@@ -44,11 +46,24 @@ export class TransactionController {
     });
   }
   //Retrive exchange rate transaction list
-  @Get('/')
+  /*@Get('/')
   async getAllTransactions(@Res() res) {
     const allTransactions = await this.transactionService.getAllHistory();
     return res.status(HttpStatus.OK).json(allTransactions);
+  }*/
+  @Get('/')
+  async getAllTransactions(
+    @Res() res,
+    @Query('page') page: number,
+    @Query('itemsPerPage') itemsPerPage: number,
+  ) {
+    const allTransactions = await this.transactionService.getAllHistory(
+      page,
+      itemsPerPage,
+    );
+    return res.status(HttpStatus.OK).json(allTransactions);
   }
+
   //Retrieve single exchange rate transaction by ID
   @Get()
   async getTransaction(@Res() res, @Query('id') id?: string) {

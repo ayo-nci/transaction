@@ -12,10 +12,28 @@ export class TransactionService {
     private transactionModel: Model<TransactionDocument>,
   ) {}
   //Fetch all transaction history
-  async getAllHistory(): Promise<TransactionDocument[]> {
-    const transactionHistory = await this.transactionModel.find().exec();
+  /* async getAllHistory(): Promise<TransactionDocument[]> {
+    const transactionHistory = await this.transactionModel
+      .find()
+      .skip(10 * (2 - 1))
+      .limit(10)
+      .exec();
+    return await transactionHistory;
+  } */
+
+  async getAllHistory(
+    page: number,
+    itemsPerPage: number,
+  ): Promise<TransactionDocument[]> {
+    const startIndex = (page - 1) * itemsPerPage;
+    const transactionHistory = await this.transactionModel
+      .find()
+      .skip(startIndex)
+      .limit(itemsPerPage)
+      .exec();
     return await transactionHistory;
   }
+
   //Fetch single transaction
   async getExchangeTransaction(id): Promise<TransactionDocument> {
     // console.log('service id is ' + id);

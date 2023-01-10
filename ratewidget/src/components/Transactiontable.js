@@ -1,3 +1,5 @@
+//Back up
+
 import { useEffect, useState, useRef } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import axios from "axios";
@@ -6,11 +8,13 @@ import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 import DateTimePicker from 'react-datetime-picker';
 import { setDate } from "date-fns";
+import GetRates from "../hooks/Getrates";
 
 const Transactiontable = () => {
     const [transactions, setTransactions] = useState([]);
+    
     const columns = [
-        { label: "Date", accessor: "date"},
+        { label: "Date/Time", accessor: "date"},
         { label: "From Currency", accessor: "from_currency"},
         { label: "From Amount", accessor: "from_amount"},
         { label: "To Currency", accessor: "to_currency"},
@@ -19,14 +23,16 @@ const Transactiontable = () => {
     ];
     const navigate = useNavigate();
     const [datetimeValue, setDatetimevalue] = useState(new Date());
-    
+ 
+
     const getAllTransactions = () => {
         axios.get(`http://localhost:5000/transaction/`).then((response)=>{
             setTransactions(response.data);
+            
         });
     }
-    
-    
+
+   
 
     useEffect(() => {
         getAllTransactions();
@@ -85,7 +91,7 @@ const Transactiontable = () => {
     
         <table className="table">
             <caption>
-                Some caption
+                Exchange Watcher
             </caption>
             <TableHead columns={columns} handleSorting={handleSorting}/>
             <TableBody columns={columns} tableData={transactions} />
