@@ -75,7 +75,7 @@ const Transactiontable = () => {
                 return (
                     a[sortField].toString().localeCompare(b[sortField].toString(), "en", {
                         numeric: true,
-                    }) * (sortOrder === "asc"? 1 : -1)
+                    }) * (sortOrder === "dsc"? 1 : -1)
                 );
             });
             setTransactions(sorted);
@@ -119,7 +119,7 @@ const Transactiontable = () => {
 
         <table className="table">
             <caption>
-                Exchange Watcher
+                Exchange History
             </caption>
             <TableHead columns={columns} handleSorting={handleSorting} />
             <TableBody columns={columns} tableData={paginatedData} />

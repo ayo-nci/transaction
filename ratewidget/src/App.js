@@ -2,7 +2,6 @@
 import './App.css';
 import { Route, Routes } from "react-router-dom";
 import Transactiontable from './components/Transactiontable';
-import AllTransactions from './components/AllTransactions';
 import AddTransaction from './components/AddTransactionForm';
 
 

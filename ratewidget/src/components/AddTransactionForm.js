@@ -30,7 +30,7 @@ const AddTransactionForm = () => {
     return (
         <form>
           <fieldset>
-            <legend>Add New Transaction</legend>
+            <legend>Exchange</legend>
             <div>
               <label htmlFor="formFromCurrency">From Currency</label>
               <select ref={from_currency}>
