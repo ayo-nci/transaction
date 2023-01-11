@@ -18,7 +18,7 @@ const Transactiontable = () => {
     const [totalPages, setTotalPages] = useState(0); //How many records returned divided by pagesize
     
     const columns = [
-        { label: "Date/Time", accessor: "date"},
+        { label: "Date-Time", accessor: "date"},
         { label: "From Currency", accessor: "from_currency"},
         { label: "From Amount", accessor: "from_amount"},
         { label: "To Currency", accessor: "to_currency"},
