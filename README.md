@@ -1,12 +1,12 @@
 
 ## Description
 
-[Exchange Converter Widget](https://github.com/ayo-nci/transaction) can be found here. Download the folder. 
+[Exchange Converter Widget](https://github.com/ayo-nci/transaction) can be found here. Download the folder and extract the folder. 
 
 
 ## How To Run
 
-From inside './Transactions, run 'npm install' to load the dependencies
+From inside './transaction-master', run 'npm install' to load the dependencies
 
 ## Installation
 
@@ -17,14 +17,16 @@ $ npm install
 
 ## Running the app
 
-Run the following command from inside the ./Transactions folder . 
+Run the following command from inside the './transaction-master' folder . 
 ```bash
 
 $ npm run start
-# The Nest server will start on port 5000
+# The Nest server will start on port 5000 and you will see past transactions via http://localhost:5000/transaction
 
-#When done, navigate to the ratewidget folder - 
-$ cd ./ratewidget
+#When done, Open another terminal and navigate to the ratewidget folder within the './transaction-master' folder. Run 'npm install' to load the dependencies and then start the app by running 'npm start'
+
+$ cd ratewidget
+$ npm install
 $ npm start
 
 ```
