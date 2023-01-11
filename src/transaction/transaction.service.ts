@@ -30,6 +30,7 @@ export class TransactionService {
       .find()
       .skip(startIndex)
       .limit(itemsPerPage)
+      .sort({ date: -1 })
       .exec();
     return await transactionHistory;
   }
@@ -51,6 +52,7 @@ export class TransactionService {
     console.log('' + startOfDay_ + ':' + endOfDay_);
     const dateFilteredTransactionHistory = await this.transactionModel
       .find({ date: { $gte: startOfDay_, $lt: endOfDay_ } })
+      .sort({ date: -1 })
       //.find({ date:{$gte:ISODate(somedatevalue 2022-03-01),$lt:isModuleNamespaceObject(uptoanother)} })
       .exec();
     return dateFilteredTransactionHistory;
