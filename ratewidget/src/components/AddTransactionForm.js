@@ -8,7 +8,6 @@ const AddTransactionForm = () => {
     const from_amount = useRef("");
     const to_currency = useRef("");
     const to_amount = useRef("");
-   // const price_type = useRef("");
     const navigate = useNavigate();
 
     const addTransactionHandler = () => {
@@ -20,7 +19,6 @@ const AddTransactionForm = () => {
             to_amount: to_amount.current.value,
             price_type: "Exchanged",
         };
-        //console.log("some payload is " + payload)
         axios.post("http://localhost:5000/transaction/create", payload).then(() => {
             navigate("/");
         });

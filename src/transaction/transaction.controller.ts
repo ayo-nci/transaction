@@ -16,8 +16,6 @@ import { TransactionService } from './transaction.service';
 
 import { CreateTransactionDTO } from './dto/createtransaction.dto';
 
-import { ExchangeRateService } from './ExchangeRateService.service';
-
 @Controller('transaction')
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
@@ -26,17 +24,11 @@ export class TransactionController {
   @Post('/create')
   async addTransaction(
     @Res() res,
-    //  @Body(new ValidationPipe({ transform: true }))
-    // createtransactionDTO: CreateTransactionDTO,
     @Body() createTransactionDTO: CreateTransactionDTO,
   ) {
-    /*  const Transaction = await this.transactionService.addExchangeTransaction(
-      createtransactionDTO,
-    );*/
-    //const TransactionClient = CreateTransactionDTO.from(createtransactionDTO);
     console.log(
       'createtransactionDTO is ' + JSON.stringify(createTransactionDTO),
-    );
+    ); //Log to console
     const Transaction = await this.transactionService.addExchangeTransaction(
       createTransactionDTO,
     );
@@ -46,11 +38,6 @@ export class TransactionController {
     });
   }
   //Retrive exchange rate transaction list
-  /*@Get('/')
-  async getAllTransactions(@Res() res) {
-    const allTransactions = await this.transactionService.getAllHistory();
-    return res.status(HttpStatus.OK).json(allTransactions);
-  }*/
   @Get('/')
   async getAllTransactions(
     @Res() res,
@@ -70,7 +57,6 @@ export class TransactionController {
     const transaction = await this.transactionService.getExchangeTransaction(
       id,
     );
-    //console.log(id + ':' + transaction);
     if (!transaction)
       throw new NotFoundException('Transaction does not exist!');
     return res.status(HttpStatus.OK).json(transaction);
@@ -83,8 +69,6 @@ export class TransactionController {
     const filteredDateHistory = await this.transactionService.getFilteredDate(
       new Date(date_.date).getTime(),
     );
-    console.log('FDH is ' + filteredDateHistory);
-    //console.log(id + ':' + transaction);
     if (!filteredDateHistory)
       throw new NotFoundException('Date does not exist!');
     return res.status(HttpStatus.OK).json(filteredDateHistory);

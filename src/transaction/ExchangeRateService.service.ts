@@ -6,11 +6,11 @@ export class ExchangeRateService {
   constructor() {
     setInterval(() => {
       this.postExchangeRates();
-    }, 300000); // 5 minutes
+    }, 30000); // 5 minutes
   }
 
   async getExchangeRates() {
-    // Call the endpoint to get BTC-USD exchange rate
+    // Call coinbase endpoint to get BTC-USD exchange rate
     const btcUsdResponse = await axios.get(
       'https://api.coinbase.com/v2/exchange-rates',
       {
@@ -22,7 +22,7 @@ export class ExchangeRateService {
     );
     const btcUsdExchangeRate = btcUsdResponse.data.data.rates.USD;
 
-    // Call the endpoint to get ETH-USD exchange rate
+    // Call the coinbase endpoint to get ETH-USD exchange rate
     const ethUsdResponse = await axios.get(
       'https://api.coinbase.com/v2/exchange-rates',
       {

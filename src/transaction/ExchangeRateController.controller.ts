@@ -1,6 +1,7 @@
 import { Controller, Inject } from '@nestjs/common';
 import { ExchangeRateService } from './ExchangeRateService.service';
 
+//Constantly runs when server begins
 @Controller()
 export class ExchangeRateController {
   constructor(

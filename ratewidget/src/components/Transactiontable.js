@@ -13,9 +13,9 @@ import Pagination from "./Pagination";
 
 const Transactiontable = () => {
     const [transactions, setTransactions] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [pageSize, setPageSize] = useState(10);
-    const [totalPages, setTotalPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1); //Tracks the current page for pagination
+    const [pageSize, setPageSize] = useState(10); //Load 10 records per page
+    const [totalPages, setTotalPages] = useState(0); //How many records returned divided by pagesize
     
     const columns = [
         { label: "Date/Time", accessor: "date"},
@@ -25,10 +25,11 @@ const Transactiontable = () => {
         { label: "To Amount", accessor: "to_amount"},
         { label: "Price Type", accessor: "price_type"},  
     ];
-    const navigate = useNavigate();
-    const [datetimeValue, setDatetimevalue] = useState(new Date());
- 
 
+    const navigate = useNavigate();
+    const [datetimeValue, setDatetimevalue] = useState(new Date()); //Gets date for picker
+ 
+    //Load exchange rate history from DB
     const getAllTransactions = () => {
         axios.get(`http://localhost:5000/transaction/`).then((response)=>{
             setTransactions(response.data);
@@ -36,11 +37,11 @@ const Transactiontable = () => {
         });
     }
 
-   
+   //Websocket stream to table
     useEffect(() => {
         getAllTransactions();
 
-        const socket = io("http://localhost:5000");
+        const socket = io("http://localhost:5000/transaction");
         socket.on("exchangeRateUpdated", () => {
             getAllTransactions();
         });
@@ -51,7 +52,7 @@ const Transactiontable = () => {
     }, []);  
 
 
-
+    //Gets date value from date picker and posts request to server for processing
     const handleDatePicker = (date) => {
         setDatetimevalue(date);
         if (!date) {getAllTransactions(); return }
@@ -60,18 +61,15 @@ const Transactiontable = () => {
             setTransactions(response.data);
             setTotalPages(Math.ceil(response.data.length / pageSize));
         });
-        console.log("datetimevalue is " + new Date(datetimeValue));
       }
 
-
+      //Allows sorting on columns
     const handleSorting = (sortField, sortOrder) =>{
-        console.log(sortField + ':' + sortOrder);
         if (sortField){
             const sorted = [...transactions].sort((a,b) => {
                 if (a[sortField] === null || a[sortField] === undefined) return 1;
                 if (b[sortField] === null || b[sortField] === undefined) return -1;
                 if (a[sortField] === null && b[sortField] === null ) return 0;
-                console.log(a[sortField] + ':' + b[sortField]);
                 return (
                     a[sortField].toString().localeCompare(b[sortField].toString(), "en", {
                         numeric: true,
@@ -94,7 +92,6 @@ const Transactiontable = () => {
         setTotalPages(Math.ceil(transactions.length / pageSize));
         setCurrentPage(1);
     }
-   // console.log("some transactions are " + transactions);
    return (
     <>
     <Row>
