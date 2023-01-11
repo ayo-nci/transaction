@@ -42,16 +42,7 @@ export class TransactionService {
       .exec();
     return await singleExchangeTransaction;
   }
-  //Filter history with date or from_currency or price type
-  async getFilteredHistory(someProp: any): Promise<TransactionDocument[]> {
-    //const propKey = someProp[0];
-    const propValue = someProp[1];
-    // const filteredtransactionhistory = await this.transactionModel.findby(someProp).exec();
-    const filteredTransactionHistory = await this.transactionModel
-      .find({ from_currency: propValue })
-      .exec();
-    return filteredTransactionHistory;
-  }
+
   //Filter history with date or from_currency or price type
   async getFilteredDate(datevalue: number): Promise<TransactionDocument[]> {
     // console.log('Received date in service is ' + datevalue);

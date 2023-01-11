@@ -2,7 +2,7 @@ const TableBody = ({ tableData, columns}) => {
 return (
     <tbody>
         {tableData.map((data) => {
-           // console.log("data is " + JSON.stringify(data));
+            console.log("data is " + JSON.stringify(data));
             return (
                 <tr key={data._id} id={data._id}>
                     

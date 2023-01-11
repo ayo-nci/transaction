@@ -89,3 +89,44 @@ th.down {
 .table tbody tr:nth-child(2n) td {
   background: #fff;
 }
+
+
+/*******Form CSS***************/
+form {
+  display: flex;
+  
+  flex-direction: row;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+
+  margin-right: 1rem;
+  padding: 0.5rem; /* add padding */
+}
+
+form > div > label {
+  width:100%;
+  margin-bottom: 0.5rem;
+}
+
+form > div > input,
+form > div > select {
+  border-radius: 0.25rem;
+  width:100%;
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  form > div {
+    width: 100%;
+  }
+}
+
+/* Tablet and desktop styles */
+@media (min-width: 768px) {
+  form > div {
+    width: 20%; /* adjust width as needed */
+  }
+}

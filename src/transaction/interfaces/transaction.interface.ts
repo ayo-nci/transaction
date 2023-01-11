@@ -6,4 +6,7 @@ export interface TransactionDocument extends Document {
   readonly to_currency: string;
   readonly to_amount: number;
   readonly price_type: string;
+  readonly date: Date;
+  readonly _id: string;
+  readonly __v: string;
 }

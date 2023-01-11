@@ -19,7 +19,8 @@
     "noFallthroughCasesInSwitch": false,
     "watch": true,
     "types": [
-      "reflect-metadata"
+      "reflect-metadata",
+      "jest"
     ]
   }
 }
