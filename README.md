@@ -3,23 +3,10 @@
 
 [Exchange Converter Widget](https://github.com/ayo-nci/transaction) can be found here. Download the folder and extract the folder. 
 
-
-## How To Run
-
-From inside './transaction-master', run 'npm install' to load the dependencies
-
-## Installation
-
+## Running the app
+From inside './transaction-master', run 'npm install' to load the dependencies. 
 ```bash
 $ npm install
-```
-
-
-## Running the app
-
-Run the following command from inside the './transaction-master' folder . 
-```bash
-
 $ npm run start
 # The Nest server will start on port 5000 and you will see past transactions via http://localhost:5000/transaction
 
