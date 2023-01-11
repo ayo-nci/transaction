@@ -11,9 +11,14 @@ From inside './transaction-master', run 'npm install' to load the dependencies a
 ```bash
 $ npm install
 $ npm run start
-# The Nest server will start on port 5000 and you will see past transactions via http://localhost:5000/transaction
+# The Nest server will start on port 5000 
+# and you will see past transactions via http://localhost:5000/transaction
 
-#When done, Open another terminal and navigate to the ratewidget folder within the './transaction-master' folder. Run 'npm install' to load the dependencies and then start the app by running 'npm start'
+# When done, Open another terminal and navigate 
+# to the ratewidget folder within the 
+# './transaction-master' folder. 
+# Run 'npm install' to load the dependencies 
+# and then start the app by running 'npm start'
 
 $ cd ratewidget
 $ npm install
